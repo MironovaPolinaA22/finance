@@ -1,6 +1,7 @@
 // src/components/TransactionItem.tsx
 import React from 'react';
 import { formatCurrency } from '../utils/currency';
+import { formatDateDisplay } from '../utils/date';
 import { useDispatch } from 'react-redux';
 import { deleteTransaction } from '../store/slices/transactionsSlice';
 import type { Transaction } from '../store/types';
@@ -19,7 +20,7 @@ const TransactionItem = ({ transaction }: Props) => {
       <div className="item-left">
         <div className="item-title">{transaction.title}</div>
         <div className="item-meta">
-          {transaction.category} • {transaction.date}
+          {transaction.category} • {formatDateDisplay(transaction.date)}
         </div>
       </div>
       <div className="item-right">

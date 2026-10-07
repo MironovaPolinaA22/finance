@@ -5,6 +5,7 @@ import { addTransaction } from '../store/slices/transactionsSlice';
 import { v4 as uuidv4 } from 'uuid';
 import type { AppDispatch } from '../store';
 import type { Transaction, TransactionType } from '../store/types';
+import { toDateInputValue } from '../utils/date';
 
 const CATEGORIES: { [K in TransactionType]: string[] } = {
   income: ['Зарплата', 'Фриланс', 'Подарок', 'Другое'],
@@ -25,7 +26,7 @@ const TransactionForm = () => {
   const [amount, setAmount] = useState<string>('');
   const [type, setType] = useState<TransactionType>('expense');
   const [category, setCategory] = useState<string>('');
-  const [date, setDate] = useState<string>('');
+  const [date, setDate] = useState<string>(toDateInputValue()); // дата по умолчанию сегодня
   const [errors, setErrors] = useState<FormErrors>({});
 
   const categories = CATEGORIES[type];
@@ -45,7 +46,7 @@ const TransactionForm = () => {
     setAmount('');
     setType('expense');
     setCategory('');
-    setDate('');
+    setDate(toDateInputValue()); // сброс к сегодняшней дате
     setErrors({});
   };
 
